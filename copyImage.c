@@ -16,12 +16,12 @@ int main(int argc,char *argv[])
 
 	start=clock(); // Note the start time for profiling purposes.
 
-	FILE *fo = fopen("images/lena_copy.bmp","wb"); // Output File name
+	FILE *fo = fopen("./lena_copy.bmp","wb"); // Output File name
 
 	int i;
 
 	FILE *streamIn; 
-        streamIn = fopen("images/lena512.bmp", "r"); // Input file name
+        streamIn = fopen("./lena512.bmp", "r"); // Input file name
    
         if (streamIn == (FILE *)0) // check if the input file has not been opened succesfully.
 	{
