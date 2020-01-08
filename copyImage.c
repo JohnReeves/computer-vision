@@ -1,70 +1,42 @@
-/**
-* @file image_copy.c
-* @brief This programs opens a BMP image, reads the header, colortable, and image data
-	and stores it in a new file. Makes a copy of the image.
-* @author Abhijit Nathwani
-* @version v0.1
-* @date 2017-12-19
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-int main(int argc,char *argv[])
-{
-	clock_t start, stop; 
+int main(int argc, char *argv[]) {
+	clock_t start = clock(); 
+	FILE *fi = fopen("./lena512.bmp", "r");
+	FILE *fo = fopen("./lena_copy.bmp","wb");
 
-	start=clock(); // Note the start time for profiling purposes.
+ 	unsigned char header[54];
+	unsigned char colorTable[1024];
 
-	FILE *fo = fopen("./lena_copy.bmp","wb"); // Output File name
-
-	int i;
-
-	FILE *streamIn; 
-        streamIn = fopen("./lena512.bmp", "r"); // Input file name
-   
-        if (streamIn == (FILE *)0) // check if the input file has not been opened succesfully.
-	{
-            printf("File opening error ocurred. Exiting program.\n");
-            exit(0);
+  if (fi == (FILE *)0) {
+     printf("File opening error ocurred. Exiting program.\n");
+     exit(0);
  	}
 
- 	unsigned char header[54]; // to store the image header
-	unsigned char colorTable[1024]; // to store the colorTable, if it exists.
-	
- 	int count = 0;
- 	for(i=0;i<54;i++) 
- 	{
- 		header[i] = getc(streamIn);  // strip out BMP header
- 		
+ 	for (int i=0; i<54; i++) {
+ 		header[i] = getc(fi);
  	}
- 	int width = *(int*)&header[18]; // read the width from the image header
- 	int height = *(int*)&header[22]; // read the height from the image header
-	int bitDepth = *(int*)&header[28]; // read the bitDepth from the image header
 
-	if(bitDepth <= 8)
-		fread(colorTable, sizeof(unsigned char), 1024, streamIn);
+ 	int width = *(int*)&header[18];
+ 	int height = *(int*)&header[22];
+	int bitDepth = *(int*)&header[28];
 
+	printf("width: %d\nheight: %d\n", width, height);
+ 	unsigned char imageBuffer[height * width];
 
-	printf("width: %d\n",width);
-	printf("height: %d\n",height );
+	if (bitDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
+	fwrite(header, sizeof(unsigned char), 54, fo); 
 
-	fwrite(header, sizeof(unsigned char), 54, fo); // write the image header to output file
-  	
- 	unsigned char buf[height * width]; // to store the image data
+	fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
 
-	fread(buf, sizeof(unsigned char), (height * width), streamIn);
-	
-	if(bitDepth <= 8)
-		fwrite(colorTable, sizeof(unsigned char), 1024, fo);	
+	if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
+	fwrite(imageBuffer, sizeof(unsigned char), (height * width), fo);
 
-	fwrite(buf, sizeof(unsigned char), (height * width), fo);
- 	
+	printf("Time: %lf ms\n",((double)(clock() - start) * 1000.0 )/ CLOCKS_PER_SEC);
+
 	fclose(fo);
- 	fclose(streamIn);
-
-	stop = clock(); 
-	
-	printf("Time: %lf ms\n",((double)(stop - start) * 1000.0 )/ CLOCKS_PER_SEC);
-
+ 	fclose(fi);
+  return 0;
 }
