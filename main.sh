@@ -5,9 +5,9 @@ python vision.py
 echo
 echo So using plain C
 echo copy ...
-gcc copyImage.c -o copyImage
-./copyImage
+gcc copyImage.c -o ./Results/copyImage
+./Results/copyImage
 echo
 echo invert ...
-gcc invertImage.c -o invertImage
-./invertImage
+gcc invertImage.c -o ./Results/invertImage
+./Results/invertImage
