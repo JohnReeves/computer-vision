@@ -11,3 +11,7 @@ echo
 echo invert ...
 gcc invertImage.c -o ./Results/invertImage
 ./Results/invertImage
+echo
+echo fold ...
+gcc foldImage.c -o ./Results/foldImage
+./Results/foldImage
