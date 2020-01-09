@@ -1,9 +1,12 @@
 # Image processing in plain c
 
-1. copy bmp image to another file
+[Losing Lena](https://www.losinglena.com/)
 
-### Todo:
+* copy greyscale image to another file;   
+* invert the greyscale image;   
+* 
 
-* replace Lena
+[Sailor Mercury](https://twitter.com/sailorhg)
 
-Lena is good; the image is not
+[Pixel Perfect](https://shop.bubblesort.io/)
+
