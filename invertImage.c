@@ -5,7 +5,7 @@
 int main(int argc, char *argv[]) {
 	clock_t start = clock(); 
 	FILE *fi = fopen("./images/lena512.bmp", "r");
-	FILE *fo = fopen("./images/lena_copy.bmp","wb");
+	FILE *fo = fopen("./images/lena_inverted.bmp","wb");
 
  	unsigned char header[54];
 	unsigned char colorTable[1024];
@@ -31,6 +31,12 @@ int main(int argc, char *argv[]) {
 
 	fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
 
+// process image - ie invert each bit in the imageBuffer
+	for (int i = 0; i < height; i++){
+	      for (int j = 0; j < width; j++){                   
+		     imageBuffer[i*width + j] = 255 - imageBuffer[i*width + j]; 
+		 }   
+	}
 	if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
 	fwrite(imageBuffer, sizeof(unsigned char), (height * width), fo);
 
