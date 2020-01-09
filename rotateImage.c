@@ -5,7 +5,7 @@
 int main(int argc, char *argv[]) {
 	clock_t start = clock(); 
 	FILE *fi = fopen("./images/lena512.bmp", "r");
-	FILE *fo = fopen("./lena_rotated.bmp","wb");
+	FILE *fo = fopen("./images/lena_rotated.bmp","wb");
 
  	unsigned char header[54];
 	unsigned char colorTable[1024];
