@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
 	clock_t start = clock(); 
 	FILE *fi = fopen("./images/lena512.bmp", "r");
 	FILE *fo = fopen("./lena_thresholded.bmp","wb");
-  unsigned int threshold = 40;
+  unsigned int threshold = 128;
 
  	unsigned char header[54];
 	unsigned char colorTable[1024];
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
 	for (int i = 0; i < height; i++){
 	      for (int j = 0; j < width; j++){
           //if (imageBuffer[i*width + j] > threshold)
-		          imageBuffer[i*width + j] = threshold;
+		          imageBuffer[i*width + j] -= threshold;
 		 }
 	}
 	if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
