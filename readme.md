@@ -73,6 +73,7 @@ For example, invert each bit in the imageBuffer by subtracting from 255:
 * invert the pixels;   
 * rotate the image;   
 * threshold the pixels;   
+* blur the image with a kernel operator;   
 
 
 ## Art and Technology
