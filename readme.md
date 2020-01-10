@@ -1,17 +1,9 @@
 # Image processing in plain c
 
-## Remember our computer science history   
-[Losing Lena](https://www.losinglena.com/)
-
-
-## Art and Technology
-
-[SailorHg](https://twitter.com/sailorhg) .  
-[Pixel Perfect](https://shop.bubblesort.io/) .  
-
 ## Input, Processing and Output
 
-It is surprisingly easy:
+Processing images is surprisingly easy:   
+
 * `Open` the image files;   
 
 ```c
@@ -73,6 +65,7 @@ For example, invert each bit in the imageBuffer by subtracting from 255:
  	fclose(fi);
 ```
 
+`NB:` There is lots more information in the links below!
 
 ## Examples
 
@@ -81,6 +74,23 @@ For example, invert each bit in the imageBuffer by subtracting from 255:
 * rotate the image;   
 * threshold the pixels;   
 
+
+## Art and Technology
+
+[SailorHg](https://twitter.com/sailorhg) .  
+[Pixel Perfect](https://shop.bubblesort.io/) .  
+
+
+## Image formats
+
+[Bitmap Images](http://www.fastgraph.com/help/bmp_header_format.html)
+[The Book](http://adaptiveart.eecs.umich.edu/2011/wp-content/uploads/2011/09/The-pocket-handbook-of-image-processing-algorithms-in-C.pdf)
+[Another Book](http://homepages.inf.ed.ac.uk/rbf/BOOKS/PHILLIPS/cips2ed.pdf)
+[Harder description](http://paulbourke.net/dataformats/bitmaps/)
+
+
+## Remember our computer science history   
+[Losing Lena](https://www.losinglena.com/)
 
 .
 
