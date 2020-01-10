@@ -23,3 +23,7 @@ echo
 echo threshold ...
 gcc ./Source/thresholdImage.c -o ./Results/thresholdImage
 ./Results/thresholdImage
+echo
+echo blurring ...
+gcc ./Source/blurImage.c -o ./Results/blurImage
+./Results/blurImage
