@@ -3,11 +3,11 @@
 #include <time.h>
 
 int main(int argc, char *argv[]) {
-	clock_t start = clock();
+	clock_t start = clock(); 
 	FILE *fi = fopen("./images/lena512.bmp", "r");
-	FILE *fo = fopen("./images/lena_blurred.bmp","wb");
-  float v = 1.0 / 9;
-  float kernel[3][3]={{v,v,v}, {v,v,v}, {v,v,v}};
+	FILE *fo = fopen("./images/lena_edgedetected.bmp","wb");
+  float kernel[3][3]=\
+  {{-1.0/4,0,1.0/4}, {0,0,0}, {1.0/4,0,-1.0/4}};
 
  	unsigned char header[54];
 	unsigned char colorTable[1024];
@@ -30,11 +30,11 @@ int main(int argc, char *argv[]) {
  	unsigned char imageOutput[height * width];
 
 	if (bitDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
-	fwrite(header, sizeof(unsigned char), 54, fo);
+	fwrite(header, sizeof(unsigned char), 54, fo); 
 
 	fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
 
-// process image - ie blur each bit in the imageBuffer with a matrix
+// process image - ie edge detect each bit in the imageBuffer with a matrix
 	for (int i = 0; i < height; i++){
 	      for (int j = 0; j < width; j++){
 

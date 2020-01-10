@@ -27,3 +27,7 @@ echo
 echo blurring ...
 gcc ./Source/blurImage.c -o ./Results/blurImage
 ./Results/blurImage
+echo
+echo edge detecting ...
+gcc ./Source/edgedetectImage.c -o ./Results/edgedetectImage
+./Results/edgedetectImage

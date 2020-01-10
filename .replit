@@ -1,0 +1,2 @@
+language = "bash"
+run = "cd ~/computer-vision; chmod 777 main.sh; ./main.sh"

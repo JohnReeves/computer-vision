@@ -7,15 +7,15 @@ Processing images is surprisingly easy:
 * `Open` the image files;   
 
 ```c
-	FILE *fi = fopen("./images/picture.bmp", "r");
-	FILE *fo = fopen("./images/inverted.bmp", "wb");
+  FILE *fi = fopen("./images/picture.bmp", "r");
+  FILE *fo = fopen("./images/inverted.bmp", "wb");
 ```
 
 * `Read` the image description;  
 
 ```c
  	unsigned char header[54];
-	unsigned char colorTable[1024];
+  unsigned char colorTable[1024];
 
   if (fi == (FILE *)0) {
      printf("Error opening file.\n");
@@ -26,7 +26,7 @@ Processing images is surprisingly easy:
 
  	int width = *(int*) &header[18];
  	int height = *(int*) &header[22];
-	int bitDepth = *(int*) &header[28];
+  int bitDepth = *(int*) &header[28];
 ```
 
 * `Read` the image given by the description;  
@@ -34,8 +34,8 @@ Processing images is surprisingly easy:
 ```c
  	unsigned char imageBuffer[height * width];
 
-	if (bitDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
-	fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
+  if (bitDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
+  fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
 ```
 * `Change` each pixel in the image;   
 
@@ -43,25 +43,25 @@ For example, invert each bit in the imageBuffer by subtracting from 255:
 ```c
  	unsigned char imageOutput[height * width];
 
-	for (int i = 0; i < height; i++){
-	      for (int j = 0; j < width; j++){                   
-		     imageOutput[i*width + j] = 255 - imageBuffer[i*width + j]; 
-		 }   
+  for (int i = 0; i < height; i++){
+	      for (int j = 0; j < width; j++){
+          imageOutput[i*width + j] = 255 - imageBuffer[i*width + j]; 
+		 }
 	}
 ```
 * `Write` the new image to a file.   
 
 ```c
-	fwrite(header, sizeof(unsigned char), 54, fo); 
+  fwrite(header, sizeof(unsigned char), 54, fo);
 
-	if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
-	fwrite(imageOutput, sizeof(unsigned char), (height * width), fo);
+  if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
+  fwrite(imageOutput, sizeof(unsigned char), (height * width), fo);
 ```
 
 * `Close` the files;   
 
 ```c
-	fclose(fo);
+  fclose(fo);
  	fclose(fi);
 ```
 
@@ -73,8 +73,12 @@ For example, invert each bit in the imageBuffer by subtracting from 255:
 * invert the pixels;   
 * rotate the image;   
 * threshold the pixels;   
-* blur the image with a kernel operator;   
+* blur using a `Gaussian` kernel;   
+* edge detection using a `Laplace` kernel;   
 
+[wiki on computer vision](https://en.wikipedia.org/wiki/Feature_detection_(computer_vision)) .  
+[wiki on Gaussian kernels](https://en.wikipedia.org/wiki/Gaussian_blur) .  
+[wiki on Edge detection](https://en.wikipedia.org/wiki/Edge_detection) .  
 
 ## Art and Technology
 
