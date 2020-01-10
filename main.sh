@@ -1,4 +1,4 @@
-lsclear
+clear
 echo No joy with Python
 python --version
 python vision.py
@@ -19,3 +19,6 @@ echo
 echo rotate ...
 gcc rotateImage.c -o ./Results/rotateImage
 ./Results/rotateImage
+echo threshold ...
+gcc thresholdImage.c -o ./Results/thresholdImage
+./Results/thresholdImage
