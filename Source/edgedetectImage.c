@@ -4,10 +4,9 @@
 
 int main(int argc, char *argv[]) {
 	clock_t start = clock(); 
-	FILE *fi = fopen("./images/lena512.bmp", "r");
-	FILE *fo = fopen("./images/lena_edgedetected.bmp","wb");
-  float kernel[3][3]=\
-  {{-1.0/4,0,1.0/4}, {0,0,0}, {1.0/4,0,-1.0/4}};
+	FILE *fi = fopen("../images/lena512.bmp", "r");
+	FILE *fo = fopen("./lena_edgedetected.bmp","wb");
+  float kernel[3][3] = {{-1.0/4,0,1.0/4}, {0,0,0}, {1.0/4,0,-1.0/4}};
 
  	unsigned char header[54];
 	unsigned char colorTable[1024];
@@ -38,14 +37,13 @@ int main(int argc, char *argv[]) {
 	for (int i = 0; i < height; i++){
 	      for (int j = 0; j < width; j++){
 
- 		     	float sum= 0.0;
+ 		     	float sum = 0.0;
 		    	for(int x = -1; x <= 1; ++x) {
 			  	  for(int y = -1; y <= 1; ++y) {
-			  		  sum=\
-              sum + (float)(kernel[x+1][x+1] * imageBuffer[(x+i) * width+(y+j)]);
+			  		  sum += (float)(kernel[x+1][y+1] * imageBuffer[(x+i) * width+(y+j)]);
 			  	}
 			  }
-		  	imageOutput[i*width+j]=sum;
+		  	imageOutput[i*width+j] = sum;
 		 }
 	}
 
