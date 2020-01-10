@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 	if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
 	fwrite(imageBuffer, sizeof(unsigned char), (height * width), fo);
 
-	printf("Time: %lf ms\n",((double)(clock() - start) * 1000.0 )/ CLOCKS_PER_SEC);
+	printf("Time: %2.3f ms\n",((double)(clock() - start) * 1000.0 )/ CLOCKS_PER_SEC);
 
 	fclose(fo);
  	fclose(fi);

@@ -19,6 +19,7 @@ echo
 echo rotate ...
 gcc ./Source/rotateImage.c -o ./Results/rotateImage
 ./Results/rotateImage
+echo
 echo threshold ...
 gcc ./Source/thresholdImage.c -o ./Results/thresholdImage
 ./Results/thresholdImage

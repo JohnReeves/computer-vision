@@ -83,10 +83,10 @@ For example, invert each bit in the imageBuffer by subtracting from 255:
 
 ## Image formats
 
-[Bitmap Images](http://www.fastgraph.com/help/bmp_header_format.html)
-[The Book](http://adaptiveart.eecs.umich.edu/2011/wp-content/uploads/2011/09/The-pocket-handbook-of-image-processing-algorithms-in-C.pdf)
-[Another Book](http://homepages.inf.ed.ac.uk/rbf/BOOKS/PHILLIPS/cips2ed.pdf)
-[Harder description](http://paulbourke.net/dataformats/bitmaps/)
+[Bitmap Images](http://www.fastgraph.com/help/bmp_header_format.html) .  
+[The Book](http://adaptiveart.eecs.umich.edu/2011/wp-content/uploads/2011/09/The-pocket-handbook-of-image-processing-algorithms-in-C.pdf) .  
+[Another Book](http://homepages.inf.ed.ac.uk/rbf/BOOKS/PHILLIPS/cips2ed.pdf) .  
+[Harder description](http://paulbourke.net/dataformats/bitmaps/) .  
 
 
 ## Remember our computer science history   
