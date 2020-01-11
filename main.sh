@@ -35,3 +35,7 @@ echo
 echo brightening ...
 gcc ./Source/brightenImage.c -o ./Results/brightenImage
 ./Results/brightenImage
+echo
+echo red inversion ...
+gcc ./Source/redImage.c -o ./Results/redImage
+./Results/redImage
