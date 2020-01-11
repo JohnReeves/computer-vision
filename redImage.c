@@ -5,7 +5,7 @@
 int main(int argc, char *argv[]) {
 	clock_t start = clock(); 
 	FILE *fi = fopen("./images/lena_color.bmp", "r");
-	FILE *fo = fopen("./lena_rinverted.bmp","wb");
+	FILE *fo = fopen("./images/lena_rinverted.bmp","wb");
 
  	unsigned char header[54];
 	unsigned char colorTable[1024];
@@ -33,18 +33,20 @@ int main(int argc, char *argv[]) {
 
 // process image - ie invert each bit in the imageBuffer
 	for (int i = 0; i < height; i++){
-	      for (int j = 0; j < width; j++){
-          for (int k = 0; k < 3; k++){
-		      imageBuffer[i*width*height + j*width + k] =\
-          imageBuffer[i*width*height + j*width + i+j+k]; 
-		    // imageBuffer[i*width + j][1] = imageBuffer[i*width + j][1]; 
-		    // imageBuffer[i*width + j][2] = imageBuffer[i*width + j][2]; 
-          }
-  	 }
+	  for (int j = 0; j < width; j++){
+      for (int k = 0; k < 3; k++){
+        if (k == 0)
+		      imageBuffer[3*(i*width + j) + k] =\
+          255-imageBuffer[3*(i*width + j) + k];
+        else
+		      imageBuffer[3*(i*width + j) + k] =\
+          imageBuffer[3*(i*width + j) + k];        
+      }
+  	}
 	}
 
 	if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
-	fwrite(imageBuffer, sizeof(unsigned char), (height * width), fo);
+	fwrite(imageBuffer, sizeof(unsigned char), (height * width * 3), fo);
 
 	printf("Time: %2.3f ms\n",((double)(clock() - start) * 1000.0 )/ CLOCKS_PER_SEC);
 
