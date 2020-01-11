@@ -39,3 +39,15 @@ echo
 echo red inversion ...
 gcc ./Source/redImage.c -o ./Results/redImage
 ./Results/redImage
+echo
+echo green inversion ...
+gcc ./Source/greenImage.c -o ./Results/greenImage
+./Results/greenImage
+echo
+echo blue inversion ...
+gcc ./Source/blueImage.c -o ./Results/blueImage
+./Results/blueImage
+echo
+echo colour inversion ...
+gcc ./Source/colorinvertImage.c -o ./Results/colorinvertImage
+./Results/colorinvertImage
