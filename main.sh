@@ -31,3 +31,7 @@ echo
 echo edge detecting ...
 gcc ./Source/edgedetectImage.c -o ./Results/edgedetectImage
 ./Results/edgedetectImage
+echo
+echo brightening ...
+gcc ./Source/brightenImage.c -o ./Results/brightenImage
+./Results/brightenImage
