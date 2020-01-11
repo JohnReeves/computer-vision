@@ -35,8 +35,8 @@ int main(int argc, char *argv[]) {
 	for (int i = 0; i < height; i++){
 	      for (int j = 0; j < width; j++){
           for (int k = 0; k < 3; k++){
-		      imageBuffer[i*width + j + k] =\
-          imageBuffer[i*width + j + k]; 
+		      imageBuffer[i*width*height + j*width + k] =\
+          imageBuffer[i*width*height + j*width + i+j+k]; 
 		    // imageBuffer[i*width + j][1] = imageBuffer[i*width + j][1]; 
 		    // imageBuffer[i*width + j][2] = imageBuffer[i*width + j][2]; 
           }
