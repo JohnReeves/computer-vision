@@ -17,24 +17,20 @@ int main(int argc, char *argv[]) {
      exit(0);
  	}
 
- 	for (int i=0; i<54; i++) {
- 		header[i] = getc(fi);
- 	}
+  fread(header, sizeof(unsigned char), 54, fi);
 
  	int width = *(int*)&header[18];
  	int height = *(int*)&header[22];
-	int bitDepth = *(int*)&header[28];
+	int colorDepth = *(int*)&header[28];
 
-	printf("width: %d\nheight: %d\n", width, height);
+	printf("width: %d\nheight: %d\ncolor depth: %d\n", width, height, colorDepth);
  	unsigned char imageBuffer[height * width];
  	unsigned char imageOutput[height * width];
 
-	if (bitDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
-	fwrite(header, sizeof(unsigned char), 54, fo);
-
+	if (colorDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
 	fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
 
-// process image - ie blur each bit in the imageBuffer with a matrix
+  // process image - ie blur each bit in the imageBuffer with a matrix
 	for (int i = 0; i < height; i++){
 	      for (int j = 0; j < width; j++){
 
@@ -49,7 +45,8 @@ int main(int argc, char *argv[]) {
 		 }
 	}
 
-	if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
+	fwrite(header, sizeof(unsigned char), 54, fo);
+	if (colorDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
 	fwrite(imageOutput, sizeof(unsigned char), (height * width), fo);
 
 	printf("Time: %2.3f ms\n",((double)(clock() - start) * 1000.0 )/ CLOCKS_PER_SEC);

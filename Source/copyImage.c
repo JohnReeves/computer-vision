@@ -15,23 +15,22 @@ int main(int argc, char *argv[]) {
      exit(0);
  	}
 
- 	for (int i=0; i<54; i++) {
- 		header[i] = getc(fi);
- 	}
+  fread(header, sizeof(unsigned char), 54, fi);
 
  	int width = *(int*)&header[18];
  	int height = *(int*)&header[22];
-	int bitDepth = *(int*)&header[28];
+	int colorDepth = *(int*)&header[28];
 
-	printf("width: %d\nheight: %d\n", width, height);
+	printf("width: %d\nheight: %d\ncolor depth: %d\n", width, height, colorDepth);
  	unsigned char imageBuffer[height * width];
 
-	if (bitDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
-	fwrite(header, sizeof(unsigned char), 54, fo); 
-
+	if (colorDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
 	fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
 
-	if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
+  // no processing required - just copying
+
+	fwrite(header, sizeof(unsigned char), 54, fo); 
+	if (colorDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
 	fwrite(imageBuffer, sizeof(unsigned char), (height * width), fo);
 
 	printf("Time: %2.3f ms\n",((double)(clock() - start) * 1000.0 )/ CLOCKS_PER_SEC);

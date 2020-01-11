@@ -22,11 +22,11 @@ Processing images is surprisingly easy:
      exit(0);
  	}
 
- 	for (int i=0; i<54; i++) header[i] = getc(fi);
+  fread(header, sizeof(unsigned char), 54, fi);
 
  	int width = *(int*) &header[18];
  	int height = *(int*) &header[22];
-  int bitDepth = *(int*) &header[28];
+  int colorDepth = *(int*) &header[28];
 ```
 
 * `Read` the image given by the description;  
