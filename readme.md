@@ -69,13 +69,14 @@ For example, invert each bit in the imageBuffer by subtracting from 255:
 
 ## Examples
 
-* copy image;   
+* copy a greyscale image;   
 * invert the pixels;   
 * rotate the image;   
 * threshold the pixels;   
 * blur using a Gaussian kernel;   
 * edge detection using a Laplace kernel;   
-* brighten image;   
+* brighten image;  
+* redden a colour image;    
 
 [wiki on computer vision](https://en.wikipedia.org/wiki/Feature_detection_(computer_vision)) .  
 [wiki on Gaussian kernels](https://en.wikipedia.org/wiki/Gaussian_blur) .  
