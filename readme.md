@@ -34,7 +34,7 @@ Processing images is surprisingly easy:
 ```c
  	unsigned char imageBuffer[height * width];
 
-  if (bitDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
+  if (colorDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
   fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
 ```
 * `Change` each pixel in the image;   
@@ -44,17 +44,16 @@ For example, invert each bit in the imageBuffer by subtracting from 255:
  	unsigned char imageOutput[height * width];
 
   for (int i = 0; i < height; i++){
-	      for (int j = 0; j < width; j++){
-          imageOutput[i*width + j] = 255 - imageBuffer[i*width + j]; 
-		 }
+    for (int j = 0; j < width; j++){
+      imageOutput[i*width + j] = 255 - imageBuffer[i*width + j]; 
+    }
 	}
 ```
 * `Write` the new image to a file.   
 
 ```c
   fwrite(header, sizeof(unsigned char), 54, fo);
-
-  if (bitDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
+  if (colorDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
   fwrite(imageOutput, sizeof(unsigned char), (height * width), fo);
 ```
 
