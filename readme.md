@@ -1,10 +1,24 @@
 # Image processing in plain c
 
-Processing images is surprisingly easy.   
+Processing images as they do in Photoshop is really quite easy.   
+
+Images are made of a sequence of pixels that draw out a picture when arranged in the correct height and width, and with the correct colours or shades of grey.
+
+So as well as the pixels making up the picture, there is also a description of the picture - letting you know the height and width to draw the picture, and perhaps the palette to use to colour the picture. 
+
+The steps for processing an image are:   
+1. open the image file;   
+2. read the description;   
+3. read the picture;   
+4. change each pixel;   
+5. write the changed pixels to the image file;   
+
+You can get good image effects with about 25 lines of code - the code below is for a bitmap image and the links below have other image formats and other effects!
+
 
 ## Input, Processing and Output
 
-### `Open` the image files;   
+### `Open` the image files   
 
 ```c
 FILE *fi = fopen("./images/picture.bmp", "r");
@@ -16,7 +30,7 @@ if (fi == (FILE *)0) {
 }
 ```
 
-### `Read` the image description;  
+### `Read` the image description  
 
 ```c
 unsigned char header[54];
@@ -29,7 +43,7 @@ int height = *(int*) &header[22];
 int colorDepth = *(int*) &header[28];
 ```
 
-### `Read` the image given by the description;  
+### `Read` the image given by the description  
 
 ```c
 unsigned char imageBuffer[height * width];
@@ -38,7 +52,7 @@ if (colorDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
 fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
 ```
 
-### `Change` each pixel in the image;   
+### `Change` each pixel in the image   
 
 For example, invert each bit in the imageBuffer by subtracting from 255:
 ```c
@@ -51,7 +65,7 @@ for (int i = 0; i < height; i++){
 }
 ```
 
-### `Write` the new image to a file.   
+### `Write` the new image to a file   
 
 ```c
 fwrite(header, sizeof(unsigned char), 54, fo);
