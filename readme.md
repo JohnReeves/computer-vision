@@ -1,67 +1,69 @@
 # Image processing in plain c
 
+Processing images is surprisingly easy.   
+
 ## Input, Processing and Output
 
-Processing images is surprisingly easy:   
-
-* `Open` the image files;   
+### `Open` the image files;   
 
 ```c
-  FILE *fi = fopen("./images/picture.bmp", "r");
-  FILE *fo = fopen("./images/inverted.bmp", "wb");
+FILE *fi = fopen("./images/picture.bmp", "r");
+FILE *fo = fopen("./images/inverted.bmp", "wb");
+
+if (fi == (FILE *)0) {
+  printf("Error opening file.\n");
+  exit(0);
+}
 ```
 
-* `Read` the image description;  
+### `Read` the image description;  
 
 ```c
- 	unsigned char header[54];
-  unsigned char colorTable[1024];
+unsigned char header[54];
+unsigned char colorTable[1024];
 
-  if (fi == (FILE *)0) {
-     printf("Error opening file.\n");
-     exit(0);
- 	}
+fread(header, sizeof(unsigned char), 54, fi);
 
-  fread(header, sizeof(unsigned char), 54, fi);
-
- 	int width = *(int*) &header[18];
- 	int height = *(int*) &header[22];
-  int colorDepth = *(int*) &header[28];
+int width = *(int*) &header[18];
+int height = *(int*) &header[22];
+int colorDepth = *(int*) &header[28];
 ```
 
-* `Read` the image given by the description;  
+### `Read` the image given by the description;  
 
 ```c
- 	unsigned char imageBuffer[height * width];
+unsigned char imageBuffer[height * width];
 
-  if (colorDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
-  fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
+if (colorDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
+fread(imageBuffer, sizeof(unsigned char), (height * width), fi);
 ```
-* `Change` each pixel in the image;   
+
+### `Change` each pixel in the image;   
 
 For example, invert each bit in the imageBuffer by subtracting from 255:
 ```c
- 	unsigned char imageOutput[height * width];
+unsigned char imageOutput[height * width];
 
-  for (int i = 0; i < height; i++){
-    for (int j = 0; j < width; j++){
-      imageOutput[i*width + j] = 255 - imageBuffer[i*width + j]; 
-    }
-	}
-```
-* `Write` the new image to a file.   
-
-```c
-  fwrite(header, sizeof(unsigned char), 54, fo);
-  if (colorDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
-  fwrite(imageOutput, sizeof(unsigned char), (height * width), fo);
+for (int i = 0; i < height; i++){
+  for (int j = 0; j < width; j++){
+    imageOutput[i*width + j] = 255 - imageBuffer[i*width + j]; 
+  }
+}
 ```
 
-* `Close` the files;   
+### `Write` the new image to a file.   
 
 ```c
-  fclose(fo);
- 	fclose(fi);
+fwrite(header, sizeof(unsigned char), 54, fo);
+if (colorDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
+fwrite(imageOutput, sizeof(unsigned char), (height * width), fo);
+```
+
+### `Close` the files;   
+
+```c
+fclose(fo);
+fclose(fi);
 ```
 
 `NB:` There is lots more information in the links below!
