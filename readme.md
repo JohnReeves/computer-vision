@@ -112,7 +112,11 @@ fclose(fi);
 
 
 ## Remember our computer science history   
-[Losing Lena](https://www.losinglena.com/)
+
+[Finding Lena](https://www.wired.com/story/finding-lena-the-patron-saint-of-jpegs/) .  
+[Losing Lena](https://www.losinglena.com/) .  
+[Experiencing Lena](https://www.cmc.edu/news/every-picture-tells-a-story) .  
+[Image Reconstruction with Fabio](https://arxiv.org/pdf/1202.6429.pdf) .  
 
 .
 
