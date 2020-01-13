@@ -51,3 +51,7 @@ echo
 echo colour inversion ...
 gcc ./Source/colorinvertImage.c -o ./Results/colorinvertImage
 ./Results/colorinvertImage
+echo
+echo black and white ...
+gcc ./Source/blackandwhiteImage.c -o ./Results/blackandwhiteImage
+./Results/blackandwhiteImage
