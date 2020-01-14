@@ -55,3 +55,7 @@ echo
 echo black and white ...
 gcc ./Source/blackandwhiteImage.c -o ./Results/blackandwhiteImage
 ./Results/blackandwhiteImage
+echo
+echo shades of grey ...
+gcc ./Source/greyscaleImage.c -o ./Results/greyscaleImage
+./Results/greyscaleImage
