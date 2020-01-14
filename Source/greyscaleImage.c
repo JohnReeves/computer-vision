@@ -47,7 +47,6 @@ int main(int argc, char *argv[]) {
   	}
 	}
 
-  *(int*)&header[28] = 1;
 	fwrite(header, sizeof(unsigned char), 54, fo); 
 	if (colorDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
 	fwrite(imageOutput, sizeof(unsigned char), (height * width * 3), fo);
