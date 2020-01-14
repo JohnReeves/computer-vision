@@ -23,6 +23,7 @@ int main(int argc, char *argv[]) {
 
 	printf("width: %d\nheight: %d\ncolor depth: %d\n", width, height, colorDepth);
  	unsigned char imageBuffer[height * width * 3];
+ 	unsigned char imageOutput[height * width];
 
 	if (colorDepth <= 8) fread(colorTable, sizeof(unsigned char), 1024, fi);
 	fread(imageBuffer, sizeof(unsigned char), (height * width * 3), fi);
@@ -30,24 +31,26 @@ int main(int argc, char *argv[]) {
   // process image - ie invert each bit in the imageBuffer
 	for (int i = 0; i < height; i++){
 	  for (int j = 0; j < width; j++){
-      for (int k = 0; k < 3; k++){
+      imageOutput[(i*width + j)] = 0;
 
+      for (int k = 0; k < 3; k++){
         if (k == 0)
-		      imageBuffer[3*(i*width + j) + k] =\
+		      imageOutput[(i*width + j)] =\
           0.3*imageBuffer[3*(i*width + j) + k];
         else if (k == 1)
-		      imageBuffer[3*(i*width + j) + k] =\
+		      imageOutput[(i*width + j)] +=\
           0.59 * imageBuffer[3*(i*width + j) + k];
         else
-		      imageBuffer[3*(i*width + j) + k] =\
+		      imageOutput[(i*width + j)] +=\
           0.11 * imageBuffer[3*(i*width + j) + k];              
       }
   	}
 	}
 
+  *(int*)&header[28] = 1;
 	fwrite(header, sizeof(unsigned char), 54, fo); 
 	if (colorDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
-	fwrite(imageBuffer, sizeof(unsigned char), (height * width * 3), fo);
+	fwrite(imageOutput, sizeof(unsigned char), (height * width * 3), fo);
 
 	printf("Time: %2.3f ms\n",((double)(clock() - start) * 1000.0 )/ CLOCKS_PER_SEC);
 
