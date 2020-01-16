@@ -56,6 +56,10 @@ echo black and white ...
 gcc ./Source/blackandwhiteImage.c -o ./Results/blackandwhiteImage
 ./Results/blackandwhiteImage
 echo
+echo collage of len ...
+gcc ./Source/collageImage.c -o ./Results/collageImage
+./Results/collageImage
+echo
 echo shades of grey ...
 gcc ./Source/greyscaleImage.c -o ./Results/greyscaleImage
 ./Results/greyscaleImage

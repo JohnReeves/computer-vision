@@ -5,7 +5,7 @@
 int main(int argc, char *argv[]) {
 	clock_t start = clock(); 
 	FILE *fi = fopen("./images/lena_color.bmp", "r");
-	FILE *fo = fopen("./images/lena_greyscale.bmp","wb");
+	FILE *fo = fopen("./images/lena_collage.bmp","wb");
 
  	unsigned char header[54];
 	unsigned char colorTable[1024];
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 
 	fwrite(header, sizeof(unsigned char), 54, fo); 
 	if (colorDepth <= 8) fwrite(colorTable, sizeof(unsigned char), 1024, fo);
-	fwrite(imageOutput, sizeof(unsigned char), (height * width), fo);
+	fwrite(imageOutput, sizeof(unsigned char), (height * width * 3), fo);
 
 	printf("Time: %2.3f ms\n",((double)(clock() - start) * 1000.0 )/ CLOCKS_PER_SEC);
 
